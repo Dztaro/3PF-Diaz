@@ -1,0 +1,17 @@
+<h2>{{ idClase ? 'Editar Clase' : 'Nueva Clase' }}</h2>
+
+<form [formGroup]="claseForm" (ngSubmit)="guardar()">
+  <mat-form-field class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombre" required>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Horario</mat-label>
+    <input matInput formControlName="horario" required>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit">
+    Guardar
+  </button>
+</form>
