@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClasesService } from '../../../../core/services/clases.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Clase } from '../../clases.model';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-clase-form',
@@ -19,7 +20,8 @@ export class ClaseFormComponent implements OnInit {
     private fb: FormBuilder,
     private clasesService: ClasesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +35,10 @@ export class ClaseFormComponent implements OnInit {
       nombre: [clase?.nombre || '', Validators.required],
       horario: [clase?.horario || '', Validators.required]
     });
+  }
+
+   get isAdmin(): boolean {
+    return this.authService.getUserRole() === 'admin';
   }
 
   guardar(): void {

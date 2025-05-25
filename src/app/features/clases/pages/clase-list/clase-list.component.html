@@ -1,5 +1,6 @@
 <h2>Lista de Clases</h2>
-<button mat-raised-button color="primary" (click)="nuevaClase()">Nueva Clase</button>
+
+<button *ngIf="isAdmin" mat-raised-button color="primary" (click)="nuevaClase()">Nueva Clase</button>
 
 <div *ngFor="let clase of clases">
   <mat-card>
@@ -8,8 +9,8 @@
       <p>Horario: {{ clase.horario }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button color="accent" (click)="editarClase(clase.id)">Editar</button>
-      <button mat-button color="warn" (click)="eliminarClase(clase.id)">Eliminar</button>
+      <button *ngIf="isAdmin" mat-button color="accent" (click)="editarClase(clase.id)">Editar</button>
+      <button *ngIf="isAdmin" mat-button color="warn" (click)="eliminarClase(clase.id)">Eliminar</button>
     </mat-card-actions>
   </mat-card>
 </div>

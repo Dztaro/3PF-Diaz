@@ -1,0 +1,15 @@
+
+{
+  "alumnos": [
+    { "id": 1, "nombre": "Juan", "apellido": "Pérez", "email": "juan@mail.com", "curso": "Futbol" },
+    { "id": 2, "nombre": "Ana", "apellido": "García", "email": "ana@mail.com", "curso": "Basquet" }
+  ],
+  "cursos": [
+    { "id": 1, "nombre": "Futbol", "descripcion": "Curso de fútbol para principiantes" },
+    { "id": 2, "nombre": "Basquet", "descripcion": "Curso de basquet nivel intermedio" }
+  ],
+  "clases": [
+    { "id": 1, "nombre": "Clase 1", "horario": "Lunes 10hs" },
+    { "id": 2, "nombre": "Clase 2", "horario": "Miércoles 15hs" }
+  ]
+}

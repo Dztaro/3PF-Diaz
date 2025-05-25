@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlumnosService } from '../../../../core/services/alumnos.service';
 import { Alumno } from '../../alumno.model';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-alumno-form',
@@ -19,7 +20,8 @@ export class AlumnoFormComponent implements OnInit {
     private fb: FormBuilder,
     private alumnosService: AlumnosService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +42,9 @@ export class AlumnoFormComponent implements OnInit {
     }
   }
 
+  isAdmin(): boolean {
+    return this.authService.getUserRole() === 'admin';
+  }
 
   guardar(): void {
     if (this.alumnoForm.invalid) return;

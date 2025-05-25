@@ -1,5 +1,5 @@
 <div class="mat-elevation-z2 p-4">
-  <button mat-raised-button color="primary" (click)="agregar()">Nuevo Alumno</button>
+  <button *ngIf="isAdmin" mat-raised-button color="primary" (click)="agregar()">Nuevo Alumno</button>
 
   <ng-container *ngIf="alumnos$ | async as alumnos">
     <table mat-table [dataSource]="alumnos" class="mat-elevation-z8 full-width-table">
@@ -32,10 +32,10 @@
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let alumno">
-          <button mat-icon-button color="accent" (click)="editar(alumno.id)">
+          <button *ngIf="isAdmin" mat-icon-button color="accent" (click)="editar(alumno.id)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="eliminar(alumno.id)">
+          <button *ngIf="isAdmin" mat-icon-button color="warn" (click)="eliminar(alumno.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

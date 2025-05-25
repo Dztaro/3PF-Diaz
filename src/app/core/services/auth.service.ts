@@ -10,18 +10,34 @@ export class AuthService {
 
   constructor(private router: Router) { }
 
-  login(usuario: string, password: string): boolean {
-    if (usuario === 'admin' && password === 'admin') {
-      this.loggedIn$.next(true);
-      return true;
-    }
-    return false;
+login(usuario: string, password: string): boolean {
+  if (usuario === 'admin' && password === 'admin') {
+    const user = { username: 'admin', role: 'admin' };
+    localStorage.setItem('user', JSON.stringify(user));
+    this.loggedIn$.next(true);
+    return true;
+  } else if (usuario === 'alumno' && password === 'alumno') {
+    const user = { username: 'alumno', role: 'user' };
+    localStorage.setItem('user', JSON.stringify(user));
+    this.loggedIn$.next(true);
+    return true;
   }
 
-  logout() {
-    this.loggedIn$.next(false);
-    this.router.navigate(['/login'])
-  }
+  return false;
+}
+
+getUserRole(): string | null {
+  const user = localStorage.getItem('user');
+  return user ? JSON.parse(user).role : null;
+}
+
+
+logout() {
+  localStorage.removeItem('user');
+  this.loggedIn$.next(false);
+  this.router.navigate(['/login']);
+}
+
 
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn$.asObservable();

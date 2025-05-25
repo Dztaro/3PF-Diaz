@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CursosService } from '../../core/services/cursos.service';
 import { Curso } from './curso.model';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-cursos',
@@ -17,10 +18,14 @@ export class CursosComponent implements OnInit {
   editandoCurso: Curso | null = null;
   columnas: string[] = ['nombre', 'duracion', 'acciones'];
 
-  constructor(private cursosService: CursosService) { }
+  constructor(public authService: AuthService, private cursosService: CursosService) { }
 
   ngOnInit(): void {
     this.cursos$ = this.cursosService.obtenerCursos();
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.getUserRole() === 'admin';
   }
 
   agregarCurso(): void {
